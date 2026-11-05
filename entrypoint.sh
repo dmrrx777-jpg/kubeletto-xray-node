@@ -1,8 +1,12 @@
 #!/bin/sh
 set -e
+# NOTE: Kubeletto's env-var API currently returns "failed to set env var"
+# for every variable (even TEST=hello), so the required values are
+# baked in here as defaults. If the platform later injects UUID /
+# WS_PATH / PORT, those values take precedence over these defaults.
 PORT=${PORT:-8080}
-: "${UUID:?UUID environment variable is required}"
-WS_PATH=${WS_PATH:-/}
+UUID=${UUID:-2e7fc655-58ab-4041-9aa9-114623d128db}
+WS_PATH=${WS_PATH:-/f596dd1178a510e9}
 mkdir -p /etc/xray
 cat > /etc/xray/config.json <<EOF
 {
